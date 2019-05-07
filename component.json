@@ -1,0 +1,465 @@
+{
+    "title": "AWS DataSync",
+    "description": "<fullname>AWS DataSync</fullname> <p>AWS DataSync is a managed data transfer service that makes it simpler for you to automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3) or Amazon Elastic File System (Amazon EFS). </p> <p>This API interface reference for AWS DataSync contains documentation for a programming interface that you can use to manage AWS DataSync.</p>",
+    "docsUrl": "https://aws.amazon.com/datasync/",
+    "url": "https://api.apis.guru/v2/specs/amazonaws.com/datasync/2018-11-09/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://datasync.amazonaws.com/",
+                    "http://datasync.amazonaws.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "hmac": {
+                "label": "Authorization (hmac)",
+                "viewClass": "TextFieldView",
+                "note": "Amazon Signature authorization v4"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "CancelTaskExecution": {
+            "main": "./lib/actions/CancelTaskExecution.js",
+            "title": "<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution. </p>",
+            "description": "<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution. </p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CancelTaskExecution.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateAgent": {
+            "main": "./lib/actions/CreateAgent.js",
+            "title": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent\">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>",
+            "description": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent\">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateAgent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateLocationEfs": {
+            "main": "./lib/actions/CreateLocationEfs.js",
+            "title": "Creates an endpoint for an Amazon EFS file system.",
+            "description": "Creates an endpoint for an Amazon EFS file system.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateLocationEfs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateLocationNfs": {
+            "main": "./lib/actions/CreateLocationNfs.js",
+            "title": "Creates an endpoint for a Network File System (NFS) file system.",
+            "description": "Creates an endpoint for a Network File System (NFS) file system.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateLocationNfs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateLocationS3": {
+            "main": "./lib/actions/CreateLocationS3.js",
+            "title": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html\">Configuring Amazon S3 Location Settings</a> in the <i>AWS DataSync User Guide</i>.</p>",
+            "description": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html\">Configuring Amazon S3 Location Settings</a> in the <i>AWS DataSync User Guide</i>.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateLocationS3.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CreateTask": {
+            "main": "./lib/actions/CreateTask.js",
+            "title": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of default <code>OverrideOptions</code> that you use to control the behavior of a task. If you don't specify default values for <code>Options</code> when you create a task, AWS DataSync populates them with safe service defaults.</p> <p>When you initially create a task, it enters the INITIALIZING status and then the CREATING status. In CREATING status, AWS DataSync attempts to mount the source Network File System (NFS) location. The task transitions to the AVAILABLE status without waiting for the destination location to mount. Instead, AWS DataSync mounts a destination before every task execution and then unmounts it after every task execution. </p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's <code>ErrorCode</code> and <code>ErrorDetail</code>. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>",
+            "description": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of default <code>OverrideOptions</code> that you use to control the behavior of a task. If you don't specify default values for <code>Options</code> when you create a task, AWS DataSync populates them with safe service defaults.</p> <p>When you initially create a task, it enters the INITIALIZING status and then the CREATING status. In CREATING status, AWS DataSync attempts to mount the source Network File System (NFS) location. The task transitions to the AVAILABLE status without waiting for the destination location to mount. Instead, AWS DataSync mounts a destination before every task execution and then unmounts it after every task execution. </p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's <code>ErrorCode</code> and <code>ErrorDetail</code>. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CreateTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteAgent": {
+            "main": "./lib/actions/DeleteAgent.js",
+            "title": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p> <note> <p>After you delete an agent, you can't reactivate it and you longer pay software charges for it.</p> </note>",
+            "description": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p> <note> <p>After you delete an agent, you can't reactivate it and you longer pay software charges for it.</p> </note>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteAgent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteLocation": {
+            "main": "./lib/actions/DeleteLocation.js",
+            "title": "Deletes the configuration of a location used by AWS DataSync. ",
+            "description": "Deletes the configuration of a location used by AWS DataSync. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteLocation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeleteTask": {
+            "main": "./lib/actions/DeleteTask.js",
+            "title": "Deletes a task.",
+            "description": "Deletes a task.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeleteTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeAgent": {
+            "main": "./lib/actions/DescribeAgent.js",
+            "title": "Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. ",
+            "description": "Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeAgent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeLocationEfs": {
+            "main": "./lib/actions/DescribeLocationEfs.js",
+            "title": "Returns metadata, such as the path information about an Amazon EFS location.",
+            "description": "Returns metadata, such as the path information about an Amazon EFS location.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeLocationEfs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeLocationNfs": {
+            "main": "./lib/actions/DescribeLocationNfs.js",
+            "title": "Returns metadata, such as the path information, about a NFS location.",
+            "description": "Returns metadata, such as the path information, about a NFS location.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeLocationNfs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeLocationS3": {
+            "main": "./lib/actions/DescribeLocationS3.js",
+            "title": "Returns metadata, such as bucket name, about an Amazon S3 bucket location.",
+            "description": "Returns metadata, such as bucket name, about an Amazon S3 bucket location.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeLocationS3.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeTask": {
+            "main": "./lib/actions/DescribeTask.js",
+            "title": "Returns metadata about a task.",
+            "description": "Returns metadata about a task.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DescribeTaskExecution": {
+            "main": "./lib/actions/DescribeTaskExecution.js",
+            "title": "Returns detailed metadata about a task that is being executed.",
+            "description": "Returns detailed metadata about a task that is being executed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DescribeTaskExecution.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ListAgents": {
+            "main": "./lib/actions/ListAgents.js",
+            "title": "<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>",
+            "description": "<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ListAgents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ListLocations": {
+            "main": "./lib/actions/ListLocations.js",
+            "title": "<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>",
+            "description": "<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ListLocations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ListTagsForResource": {
+            "main": "./lib/actions/ListTagsForResource.js",
+            "title": "Returns all the tags associated with a specified resources. ",
+            "description": "Returns all the tags associated with a specified resources. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ListTagsForResource.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ListTaskExecutions": {
+            "main": "./lib/actions/ListTaskExecutions.js",
+            "title": "Returns a list of executed tasks.",
+            "description": "Returns a list of executed tasks.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ListTaskExecutions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ListTasks": {
+            "main": "./lib/actions/ListTasks.js",
+            "title": "Returns a list of all the tasks.",
+            "description": "Returns a list of all the tasks.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ListTasks.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "StartTaskExecution": {
+            "main": "./lib/actions/StartTaskExecution.js",
+            "title": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology\">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p>",
+            "description": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology\">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/StartTaskExecution.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "TagResource": {
+            "main": "./lib/actions/TagResource.js",
+            "title": "Applies a key-value pair to an AWS resource.",
+            "description": "Applies a key-value pair to an AWS resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/TagResource.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UntagResource": {
+            "main": "./lib/actions/UntagResource.js",
+            "title": "Removes a tag from an AWS resource.",
+            "description": "Removes a tag from an AWS resource.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UntagResource.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateAgent": {
+            "main": "./lib/actions/UpdateAgent.js",
+            "title": "Updates the name of an agent.",
+            "description": "Updates the name of an agent.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateAgent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateTask": {
+            "main": "./lib/actions/UpdateTask.js",
+            "title": "Updates the metadata associated with a task.",
+            "description": "Updates the metadata associated with a task.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateTask.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

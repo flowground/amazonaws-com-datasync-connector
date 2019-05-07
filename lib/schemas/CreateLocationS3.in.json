@@ -1,0 +1,105 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "CreateLocationS3Request",
+            "properties": {
+                "S3BucketArn": {
+                    "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
+                    "maxLength": 76,
+                    "pattern": "^arn:(aws|aws-cn):s3:::([^/]*)$",
+                    "type": "string"
+                },
+                "S3Config": {
+                    "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket. For detailed information about using such a role, see <a href=\"https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.",
+                    "properties": {
+                        "BucketAccessRoleArn": {
+                            "description": "The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. ",
+                            "maxLength": 2048,
+                            "pattern": "^arn:(aws|aws-cn):iam::[0-9]{12}:role/.*$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "BucketAccessRoleArn"
+                    ],
+                    "type": "object"
+                },
+                "Subdirectory": {
+                    "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
+                    "maxLength": 4096,
+                    "pattern": "^[a-zA-Z0-9_\\-\\./]+$",
+                    "type": "string"
+                },
+                "Tags": {
+                    "description": "The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.",
+                    "items": {
+                        "description": "Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.",
+                        "properties": {
+                            "Key": {
+                                "description": "The key for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,128}$",
+                                "type": "string"
+                            },
+                            "Value": {
+                                "description": "The value for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,256}$",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "maxItems": 55,
+                    "minItems": 0,
+                    "type": "array"
+                }
+            },
+            "required": [
+                "Subdirectory",
+                "S3BucketArn",
+                "S3Config"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

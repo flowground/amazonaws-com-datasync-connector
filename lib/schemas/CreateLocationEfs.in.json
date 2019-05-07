@@ -1,0 +1,117 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "CreateLocationEfsRequest",
+            "properties": {
+                "Ec2Config": {
+                    "description": "The subnet and security group that the Amazon EFS file system uses.",
+                    "properties": {
+                        "SecurityGroupArns": {
+                            "description": "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
+                            "items": {
+                                "maxLength": 128,
+                                "pattern": "^arn:(aws|aws-cn):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+                                "type": "string"
+                            },
+                            "maxItems": 5,
+                            "minItems": 1,
+                            "type": "array"
+                        },
+                        "SubnetArn": {
+                            "description": "The ARN of the subnet that the Amazon EC2 resource belongs in. ",
+                            "maxLength": 128,
+                            "pattern": "^arn:(aws|aws-cn):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "SubnetArn",
+                        "SecurityGroupArns"
+                    ],
+                    "type": "object"
+                },
+                "EfsFilesystemArn": {
+                    "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
+                    "maxLength": 128,
+                    "pattern": "^arn:(aws|aws-cn):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
+                    "type": "string"
+                },
+                "Subdirectory": {
+                    "description": "A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.",
+                    "maxLength": 4096,
+                    "pattern": "^[a-zA-Z0-9_\\-\\./]+$",
+                    "type": "string"
+                },
+                "Tags": {
+                    "description": "The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.",
+                    "items": {
+                        "description": "Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.",
+                        "properties": {
+                            "Key": {
+                                "description": "The key for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,128}$",
+                                "type": "string"
+                            },
+                            "Value": {
+                                "description": "The value for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,256}$",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "maxItems": 55,
+                    "minItems": 0,
+                    "type": "array"
+                }
+            },
+            "required": [
+                "Subdirectory",
+                "EfsFilesystemArn",
+                "Ec2Config"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

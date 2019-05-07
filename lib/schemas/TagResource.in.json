@@ -1,0 +1,83 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "TagResourceRequest",
+            "properties": {
+                "ResourceArn": {
+                    "description": "The Amazon Resource Name (ARN) of the resource to apply the tag to.",
+                    "maxLength": 128,
+                    "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$",
+                    "type": "string"
+                },
+                "Tags": {
+                    "description": "The tags to apply.",
+                    "items": {
+                        "description": "Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.",
+                        "properties": {
+                            "Key": {
+                                "description": "The key for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,128}$",
+                                "type": "string"
+                            },
+                            "Value": {
+                                "description": "The value for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,256}$",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "maxItems": 55,
+                    "minItems": 0,
+                    "type": "array"
+                }
+            },
+            "required": [
+                "ResourceArn",
+                "Tags"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

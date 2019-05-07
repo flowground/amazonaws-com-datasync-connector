@@ -1,0 +1,110 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "CreateLocationNfsRequest",
+            "properties": {
+                "OnPremConfig": {
+                    "description": "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.",
+                    "properties": {
+                        "AgentArns": {
+                            "description": "ARNs)of the agents to use for an NFS location.",
+                            "items": {
+                                "maxLength": 128,
+                                "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+                                "type": "string"
+                            },
+                            "maxItems": 64,
+                            "minItems": 1,
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "AgentArns"
+                    ],
+                    "type": "object"
+                },
+                "ServerHostname": {
+                    "description": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>",
+                    "maxLength": 255,
+                    "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
+                    "type": "string"
+                },
+                "Subdirectory": {
+                    "description": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want sync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. For information about NFS export configuration, see <a href=\"https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html\">18.7. The /etc/exports Configuration File</a> in the Centos documentation. </p>",
+                    "maxLength": 4096,
+                    "pattern": "^[a-zA-Z0-9_\\-\\./]+$",
+                    "type": "string"
+                },
+                "Tags": {
+                    "description": "The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.",
+                    "items": {
+                        "description": "Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a>ListTagsForResource</a> operation is called.",
+                        "properties": {
+                            "Key": {
+                                "description": "The key for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,128}$",
+                                "type": "string"
+                            },
+                            "Value": {
+                                "description": "The value for an AWS resource tag.",
+                                "maxLength": 256,
+                                "minLength": 1,
+                                "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,256}$",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "maxItems": 55,
+                    "minItems": 0,
+                    "type": "array"
+                }
+            },
+            "required": [
+                "Subdirectory",
+                "ServerHostname",
+                "OnPremConfig"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
