@@ -5,7 +5,7 @@
 A generated **flow**ground connector for the AWS DataSync API (version 2018-11-09).
 
 Generated from: https://api.apis.guru/v2/specs/amazonaws.com/datasync/2018-11-09/swagger.json<br/>
-Generated at: 2019-05-07T17:35:18+03:00
+Generated at: 2019-07-08T14:12:40+03:00
 
 ## API Description
 
@@ -17,7 +17,8 @@ Supported authorization schemes:
 - API Key
 ## Actions
 
-### <p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution. </p>
+### CancelTaskExecution
+<blockquote><p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution. </p></blockquote>
 
 #### Input Parameters
 * `Action` - _required_
@@ -30,7 +31,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. For more information, see <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>
+### CreateAgent
+<blockquote><p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. For more information, see <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/></blockquote>
 
 #### Input Parameters
 * `Action` - _required_
@@ -43,7 +45,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Creates an endpoint for an Amazon EFS file system.
+### CreateLocationEfs
+> Creates an endpoint for an Amazon EFS file system.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -56,7 +59,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Creates an endpoint for a Network File System (NFS) file system.
+### CreateLocationNfs
+> Creates an endpoint for a Network File System (NFS) file system.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -69,7 +73,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html">Configuring Amazon S3 Location Settings</a> in the <i>AWS DataSync User Guide</i>.</p>
+### CreateLocationS3
+<blockquote><p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html">Configuring Amazon S3 Location Settings</a> in the <i>AWS DataSync User Guide</i>.</p></blockquote>
 
 #### Input Parameters
 * `Action` - _required_
@@ -82,7 +87,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Creates a task. A task is a set of two locations (source and destination) and a set of default <code>OverrideOptions</code> that you use to control the behavior of a task. If you don't specify default values for <code>Options</code> when you create a task, AWS DataSync populates them with safe service defaults.</p> <p>When you initially create a task, it enters the INITIALIZING status and then the CREATING status. In CREATING status, AWS DataSync attempts to mount the source Network File System (NFS) location. The task transitions to the AVAILABLE status without waiting for the destination location to mount. Instead, AWS DataSync mounts a destination before every task execution and then unmounts it after every task execution. </p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's <code>ErrorCode</code> and <code>ErrorDetail</code>. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>
+### CreateTask
+<blockquote><p>Creates a task. A task is a set of two locations (source and destination) and a set of default <code>OverrideOptions</code> that you use to control the behavior of a task. If you don't specify default values for <code>Options</code> when you create a task, AWS DataSync populates them with safe service defaults.</p> <p>When you initially create a task, it enters the INITIALIZING status and then the CREATING status. In CREATING status, AWS DataSync attempts to mount the source Network File System (NFS) location. The task transitions to the AVAILABLE status without waiting for the destination location to mount. Instead, AWS DataSync mounts a destination before every task execution and then unmounts it after every task execution. </p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's <code>ErrorCode</code> and <code>ErrorDetail</code>. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p></blockquote>
 
 #### Input Parameters
 * `Action` - _required_
@@ -95,7 +101,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p> <note> <p>After you delete an agent, you can't reactivate it and you longer pay software charges for it.</p> </note>
+### DeleteAgent
+<blockquote><p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p> <note> <p>After you delete an agent, you can't reactivate it and you longer pay software charges for it.</p> </note></blockquote>
 
 #### Input Parameters
 * `Action` - _required_
@@ -108,7 +115,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Deletes the configuration of a location used by AWS DataSync.
+### DeleteLocation
+> Deletes the configuration of a location used by AWS DataSync.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -121,7 +129,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Deletes a task.
+### DeleteTask
+> Deletes a task.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -134,7 +143,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request.
+### DescribeAgent
+> Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -147,7 +157,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns metadata, such as the path information about an Amazon EFS location.
+### DescribeLocationEfs
+> Returns metadata, such as the path information about an Amazon EFS location.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -160,7 +171,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns metadata, such as the path information, about a NFS location.
+### DescribeLocationNfs
+> Returns metadata, such as the path information, about a NFS location.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -173,7 +185,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns metadata, such as bucket name, about an Amazon S3 bucket location.
+### DescribeLocationS3
+> Returns metadata, such as bucket name, about an Amazon S3 bucket location.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -186,7 +199,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns metadata about a task.
+### DescribeTask
+> Returns metadata about a task.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -199,7 +213,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns detailed metadata about a task that is being executed.
+### DescribeTaskExecution
+> Returns detailed metadata about a task that is being executed.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -212,11 +227,12 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>
+### ListAgents
+<blockquote><p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p></blockquote>
 
 #### Input Parameters
-* `MaxResults` - _optional_ - Pagination limit
-* `NextToken` - _optional_ - Pagination token
+* `MaxResults` - _optional_ - Pagination limit<br/>
+* `NextToken` - _optional_ - Pagination token<br/>
 * `X-Amz-Content-Sha256` - _optional_
 * `X-Amz-Date` - _optional_
 * `X-Amz-Algorithm` - _optional_
@@ -225,11 +241,12 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>
+### ListLocations
+<blockquote><p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p></blockquote>
 
 #### Input Parameters
-* `MaxResults` - _optional_ - Pagination limit
-* `NextToken` - _optional_ - Pagination token
+* `MaxResults` - _optional_ - Pagination limit<br/>
+* `NextToken` - _optional_ - Pagination token<br/>
 * `X-Amz-Content-Sha256` - _optional_
 * `X-Amz-Date` - _optional_
 * `X-Amz-Algorithm` - _optional_
@@ -238,11 +255,12 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns all the tags associated with a specified resources.
+### ListTagsForResource
+> Returns all the tags associated with a specified resources.<br/>
 
 #### Input Parameters
-* `MaxResults` - _optional_ - Pagination limit
-* `NextToken` - _optional_ - Pagination token
+* `MaxResults` - _optional_ - Pagination limit<br/>
+* `NextToken` - _optional_ - Pagination token<br/>
 * `X-Amz-Content-Sha256` - _optional_
 * `X-Amz-Date` - _optional_
 * `X-Amz-Algorithm` - _optional_
@@ -251,11 +269,12 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns a list of executed tasks.
+### ListTaskExecutions
+> Returns a list of executed tasks.<br/>
 
 #### Input Parameters
-* `MaxResults` - _optional_ - Pagination limit
-* `NextToken` - _optional_ - Pagination token
+* `MaxResults` - _optional_ - Pagination limit<br/>
+* `NextToken` - _optional_ - Pagination token<br/>
 * `X-Amz-Content-Sha256` - _optional_
 * `X-Amz-Date` - _optional_
 * `X-Amz-Algorithm` - _optional_
@@ -264,11 +283,12 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Returns a list of all the tasks.
+### ListTasks
+> Returns a list of all the tasks.<br/>
 
 #### Input Parameters
-* `MaxResults` - _optional_ - Pagination limit
-* `NextToken` - _optional_ - Pagination token
+* `MaxResults` - _optional_ - Pagination limit<br/>
+* `NextToken` - _optional_ - Pagination token<br/>
 * `X-Amz-Content-Sha256` - _optional_
 * `X-Amz-Date` - _optional_
 * `X-Amz-Algorithm` - _optional_
@@ -277,20 +297,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### <p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p>
-
-#### Input Parameters
-* `Action` - _required_
-* `Version` - _required_
-* `X-Amz-Content-Sha256` - _optional_
-* `X-Amz-Date` - _optional_
-* `X-Amz-Algorithm` - _optional_
-* `X-Amz-Credential` - _optional_
-* `X-Amz-Security-Token` - _optional_
-* `X-Amz-Signature` - _optional_
-* `X-Amz-SignedHeaders` - _optional_
-
-### Applies a key-value pair to an AWS resource.
+### StartTaskExecution
+<blockquote><p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in <a href="https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p></blockquote>
 
 #### Input Parameters
 * `Action` - _required_
@@ -303,7 +311,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Removes a tag from an AWS resource.
+### TagResource
+> Applies a key-value pair to an AWS resource.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -316,7 +325,8 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Updates the name of an agent.
+### UntagResource
+> Removes a tag from an AWS resource.<br/>
 
 #### Input Parameters
 * `Action` - _required_
@@ -329,7 +339,22 @@ Supported authorization schemes:
 * `X-Amz-Signature` - _optional_
 * `X-Amz-SignedHeaders` - _optional_
 
-### Updates the metadata associated with a task.
+### UpdateAgent
+> Updates the name of an agent.<br/>
+
+#### Input Parameters
+* `Action` - _required_
+* `Version` - _required_
+* `X-Amz-Content-Sha256` - _optional_
+* `X-Amz-Date` - _optional_
+* `X-Amz-Algorithm` - _optional_
+* `X-Amz-Credential` - _optional_
+* `X-Amz-Security-Token` - _optional_
+* `X-Amz-Signature` - _optional_
+* `X-Amz-SignedHeaders` - _optional_
+
+### UpdateTask
+> Updates the metadata associated with a task.<br/>
 
 #### Input Parameters
 * `Action` - _required_
